@@ -6,52 +6,85 @@ export const sampleStories = [
     id: "s1",
     user: "Zack",
     avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
-    content: "Just posted about my new project! Check it out!",
-    image: "https://picsum.photos/id/237/800/600", // Random image
+    content: `Just posted about my new project! Check it out!  
+It's something I’ve been working on for weeks.  
+Would love your thoughts and feedback.  
+Tech meets creativity in this one.  
+Link is in my bio—go explore!  
+#devlife #newbeginnings`,
+    image: "https://picsum.photos/id/237/800/600",
   },
   {
     id: "s2",
     user: "TechDaily",
     avatar: "https://via.placeholder.com/60/33FF57/FFFFFF?text=TD",
-    content: "Breaking news: AI advancements hit new heights!",
-    image: "https://picsum.photos/id/238/800/600", // Random image
+    content: `Breaking news: AI advancements hit new heights!  
+Experts predict a major shift in productivity.  
+GPT-5 is now capable of reasoning and coding.  
+Ethical concerns are rising in the community.  
+Stay tuned for exclusive interviews.  
+#ArtificialIntelligence #FutureTech`,
+    image: "https://picsum.photos/id/238/800/600",
   },
   {
     id: "s3",
     user: "FoodieGuru",
     avatar: "https://via.placeholder.com/60/3357FF/FFFFFF?text=FG",
-    content: "My latest recipe: Spicy Mango Salsa!",
-    image: "https://picsum.photos/id/239/800/600", // Random image
+    content: `My latest recipe: Spicy Mango Salsa!  
+It’s sweet, tangy, and has the perfect kick.  
+Pairs amazingly with nachos or grilled chicken.  
+Takes just 10 minutes to make.  
+Swipe up for the full recipe and video.  
+#FoodieLove #HomeChef`,
+    image: "https://picsum.photos/id/239/800/600",
   },
   {
     id: "s4",
     user: "TravelBug",
     avatar: "https://via.placeholder.com/60/FFFF33/000000?text=TB",
-    content: "Dreaming of my next adventure in Bali.",
-    image: "https://picsum.photos/id/240/800/600", // Random image
+    content: `Dreaming of my next adventure in Bali.  
+Sunsets, surfing, and serene beaches await.  
+Can't wait to explore hidden waterfalls.  
+Do you have any must-visit spots?  
+Planning to vlog the entire trip.  
+#TravelGoals #Wanderlust`,
+    image: "https://picsum.photos/id/240/800/600",
   },
   {
     id: "s5",
     user: "FitnessPro",
     avatar: "https://via.placeholder.com/60/FF33FF/FFFFFF?text=FP",
-    content: "New workout routine for maximum gains!",
-    image: "https://picsum.photos/id/241/800/600", // Random image
+    content: `New workout routine for maximum gains!  
+Focused on strength and mobility this week.  
+5 AM gym grind never felt better.  
+Follow along for daily tips and form checks.  
+Let’s crush those fitness goals together!  
+#FitnessMotivation #NoDaysOff`,
+    image: "https://picsum.photos/id/241/800/600",
   },
   {
-    // New Story 1
     id: "s6",
     user: "ArtfulCreator",
     avatar: "https://via.placeholder.com/60/8A2BE2/FFFFFF?text=AC",
-    content: "My new digital art piece is live!",
-    image: "https://picsum.photos/id/242/800/600", // Another random image
+    content: `My new digital art piece is live!  
+Inspired by space and surrealism.  
+Took over 20 hours of layering and shading.  
+Available as NFT for limited time.  
+Would love to hear what emotions it sparks.  
+#DigitalArt #NFTdrop`,
+    image: "https://picsum.photos/id/242/800/600",
   },
   {
-    // New Story 2
     id: "s7",
     user: "GadgetGeek",
     avatar: "https://via.placeholder.com/60/00CED1/FFFFFF?text=GG",
-    content: "Unboxing the latest smartphone!",
-    image: "https://picsum.photos/id/243/800/600", // Yet another random image
+    content: `Unboxing the latest smartphone!  
+This one’s packed with cool new features.  
+Crazy fast processor and sleek design.  
+Camera test and benchmark results coming soon.  
+Hit like if you're a tech lover too!  
+#UnboxingTime #TechReview`,
+    image: "https://picsum.photos/id/243/800/600",
   },
 ];
 
@@ -71,41 +104,3 @@ export const commentsData = [
   // Add more comments as needed
 ];
 
-
-// export const sampleStories = [
-//     {
-//       id: "s1",
-//       user: "You",
-//       avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
-//       content: "Just posted about my new project! Check it out!",
-//       image: "https://picsum.photos/id/237/800/600", // Random image
-//     },
-//     {
-//       id: "s2",
-//       user: "TechDaily",
-//       avatar: "https://via.placeholder.com/60/33FF57/FFFFFF?text=TD",
-//       content: "Breaking news: AI advancements hit new heights!",
-//       image: "https://picsum.photos/id/238/800/600", // Random image
-//     },
-//     {
-//       id: "s3",
-//       user: "FoodieGuru",
-//       avatar: "https://via.placeholder.com/60/3357FF/FFFFFF?text=FG",
-//       content: "My latest recipe: Spicy Mango Salsa!",
-//       image: "https://picsum.photos/id/239/800/600", // Random image
-//     },
-//     {
-//       id: "s4",
-//       user: "TravelBug",
-//       avatar: "https://via.placeholder.com/60/FFFF33/000000?text=TB",
-//       content: "Dreaming of my next adventure in Bali.",
-//       image: "https://picsum.photos/id/240/800/600", // Random image
-//     },
-//     {
-//       id: "s5",
-//       user: "FitnessPro",
-//       avatar: "https://via.placeholder.com/60/FF33FF/FFFFFF?text=FP",
-//       content: "New workout routine for maximum gains!",
-//       image: "https://picsum.photos/id/241/800/600", // Random image
-//     },
-//   ];
