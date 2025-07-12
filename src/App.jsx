@@ -59,7 +59,7 @@ function App() {
     user: "Zack",
     avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
     content: "Just posted about my new project! Check it out!",
-    image: "https://picsum.photos/id/237/800/600", // Ensure caption exists for PostCard
+    image: "https://picsum.photos/id/237/800/600", 
     likes: 3123, // Dummy data for likes
     comments: 245, // Dummy data for comments
     time: "2h",
@@ -114,7 +114,6 @@ function App() {
     if (commentTextToAdd.trim()) {
       console.log(`Comment "${commentTextToAdd}" added.`);
       // setCurrentPostComments((prevComments) => [...prevComments, newComment]);
-
       setCommentText(""); // Clear input field
     }
   };
@@ -145,13 +144,12 @@ function App() {
         username: "BotComment",
         text: word.trim(),
       };
-
       console.log(
         `Generated comment "${word}" for post ID: ${selectedPostForComments.id}`
       );
-
-      // handleAddComment(word); // Reuse existing comment adder
+      // Reuse existing comment adder
       setCurrentPostComments((prevComments) => [...prevComments, newGeneratedComment]);
+      handleAddComment(word);
     }
   };
   // console.log("specificCommentWords========>",specificCommentWords)

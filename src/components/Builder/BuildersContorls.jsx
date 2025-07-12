@@ -34,7 +34,6 @@ export default function BuilderControls({
   onAddSpecificWordAsComment,
 }) {
   const handleChipClick = (word) => {
-    // If the word is already in the text field, don't add it again or toggle
     const currentWords = specificCommentWords
       .split(",")
       .map((s) => s.trim())
@@ -44,22 +43,9 @@ export default function BuilderControls({
         currentWords.length > 0 ? `${specificCommentWords}, ${word}` : word;
       onSpecificCommentWordsChange(newWords);
       onAddSpecificWordAsComment(newWords);
+      // onSpecificCommentWordsChange('')
     }
   };
-
-  // const handleNextAndAddComment = () => {
-  //   // Only add as comment if specific words input is active in current step
-  //   if (currentStep === 1 && specificCommentWords.trim()) {
-  //     const wordsArray = specificCommentWords
-  //       .split(",")
-  //       .map((word) => word.trim())
-  //       .filter(Boolean);
-  //     wordsArray.forEach((word) => {
-  //       onAddSpecificWordAsComment(word); // Call the new handler from App.js for each word
-  //     });
-  //   }
-  //   onNextStep(); // Always go to the next step
-  // };
 
   return (
     <>
@@ -136,7 +122,7 @@ export default function BuilderControls({
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    mr: 0.1, // Spacing between stories
+                    mr: 1, // Spacing between stories
                     cursor: "pointer",
                     "&:hover": { opacity: 0.8 },
                   }}
@@ -147,12 +133,12 @@ export default function BuilderControls({
                     alt={story.user}
                     variant="square" // This makes the Avatar square
                     sx={{
-                      width: 80,
-                      height: 100,
+                      width: 90,
+                      height: 120,
                       borderRadius: "8px",
                       // Conditionally apply the blue border based on activeStoryId
                       border:
-                        story.id === activeStoryId
+                        story.id === (activeStoryId || "s1")
                           ? "2px solid #2196F3" // Blue border for active story
                           : "2px solid transparent", // Transparent border for inactive stories
                     }}
@@ -172,7 +158,7 @@ export default function BuilderControls({
 
         {/* ==========>   End  of  Stories  <=========== */}
 
-        <Box mb={3} px={1}>
+        <Box mb={1} px={1}>
           <RadioGroup aria-label="post-or-reel" name="post-or-reel-options">
             <Box
               display="flex"
@@ -256,7 +242,7 @@ export default function BuilderControls({
         {/* Comment Automation Settings Section */}
 
         {currentStep >= 1 && (
-          <Box mb={3} px={1}>
+          <Box mb={1} px={1}>
             <Typography variant="subtitle1" mt={2} fontWeight="bold">
               And this comment has:
             </Typography>
@@ -294,19 +280,41 @@ export default function BuilderControls({
                 <Chip
                   label="Price"
                   size="small"
-                  sx={{ mr: 0.5, cursor: "pointer" }}
+                  sx={{
+                    mr: 0.5,
+                    cursor: "pointer",
+                    backgroundColor: "#e9f4f5",
+                    "&:hover": {
+                      backgroundColor: "#dbe8e9",
+                    },
+                  }}
                   onClick={() => handleChipClick("Price")} // Add onClick
                 />
                 <Chip
                   label="Link"
                   size="small"
-                  sx={{ mr: 0.5, cursor: "pointer" }}
+                  sx={{
+                    mr: 0.5,
+                    cursor: "pointer",
+                    backgroundColor: "#e9f4f5",
+
+                    "&:hover": {
+                      backgroundColor: "#dbe8e9",
+                    },
+                  }}
                   onClick={() => handleChipClick("Link")} // Add onClick
                 />
                 <Chip
                   label="Shop"
                   size="small"
-                  sx={{ cursor: "pointer" }}
+                  sx={{
+                    cursor: "pointer",
+                    backgroundColor: "#e9f4f5",
+
+                    "&:hover": {
+                      backgroundColor: "#dbe8e9",
+                    },
+                  }}
                   onClick={() => handleChipClick("Shop")} // Add onClick
                 />
               </Typography>
@@ -324,7 +332,18 @@ export default function BuilderControls({
             >
               <FormControlLabel
                 value="any"
-                control={<Radio />}
+                control={
+                  <Radio
+                    sx={{
+                      "&.Mui-checked": {
+                        color: "#000", // Checked outer circle
+                      },
+                      "& .MuiSvgIcon-root": {
+                        fontSize: 20,
+                      },
+                    }}
+                  />
+                }
                 label="Any word"
               />
             </Box>
@@ -334,7 +353,7 @@ export default function BuilderControls({
         {/*  DIRECT MESSAGE Sections */}
 
         {currentStep >= 2 && (
-          <Box mb={2}>
+          <Box mb={1}>
             <Typography variant="subtitle1" mt={2} fontWeight={"bold"}>
               They will get:
             </Typography>
@@ -377,7 +396,7 @@ export default function BuilderControls({
 
         {/* Other Automation Settings Section */}
         {currentStep >= 3 && (
-          <Box mb={3}>
+          <Box mb={1}>
             <Typography variant="h6" gutterBottom fontWeight={"bold"}>
               Other things to automate
             </Typography>
