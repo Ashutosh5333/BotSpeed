@@ -11,18 +11,13 @@ import {
   Avatar,
   RadioGroup,
   FormControlLabel,
-  Radio, // Added Avatar import
+  Radio,
 } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 import { sampleStories } from "../Constant";
 
 export default function BuilderControls({
-  postContent,
-  onPostContentChange,
-  onCreatePost,
-  storyContent,
-  onStoryContentChange,
-  onStoryPreviewClick, // New prop for handling clicks on the hardcoded story previews
+  onStoryPreviewClick,
   commentText,
   onCommentTextChange,
   onAddComment,
@@ -30,7 +25,7 @@ export default function BuilderControls({
   currentStep, // New prop
   onNextStep,
   specificCommentWords, //  TextField value
-  onSpecificCommentWordsChange, // Setter for the TextField value
+  onSpecificCommentWordsChange,
   onAddSpecificWordAsComment,
 }) {
   const handleChipClick = (word) => {
@@ -50,13 +45,11 @@ export default function BuilderControls({
   return (
     <>
       <Paper
-        elevation={3}
         sx={{
           flex: 1,
           p: 1,
-          borderRadius: "12px",
+          borderRadius: "2px",
           overflowY: "auto",
-          maxHeight: { xs: "50vh", md: "calc(100vh - 100px)" },
         }}
       >
         <Box mb={1} px={1}>
@@ -370,7 +363,21 @@ export default function BuilderControls({
                 defaultValue="Hey there! I'm so happy you're here, thanks so much for your interest 😊 Click below and I'll send you the link in just a sec ✨"
                 sx={{ mb: 1 }}
               />
-              <Button variant="outlined" startIcon={<AddIcon />} sx={{ mb: 2 }}>
+              <Button
+                variant="outlined"
+                fullWidth
+                startIcon={<AddIcon />}
+                sx={{
+                  bgcolor: "white",
+                  borderColor: "#f5f5f5",
+                  color: "#000",
+                  boxShadow: 0.1,
+                  "&:hover": {
+                    backgroundColor: "#f9f9f9",
+                    boxShadow: 1,
+                  },
+                }}
+              >
                 Add a Link
               </Button>
             </Box>
@@ -387,7 +394,21 @@ export default function BuilderControls({
                 placeholder="Write a message"
                 sx={{ mb: 2 }}
               />
-              <Button variant="outlined" startIcon={<AddIcon />}>
+              <Button
+                variant="outlined"
+                fullWidth
+                startIcon={<AddIcon />}
+                sx={{
+                  bgcolor: "white",
+                  borderColor: "#f5f5f5",
+                  color: "#000",
+                  boxShadow: 0.1,
+                  "&:hover": {
+                    backgroundColor: "#f9f9f9",
+                    boxShadow: 1,
+                  },
+                }}
+              >
                 Add a Link
               </Button>
             </Box>

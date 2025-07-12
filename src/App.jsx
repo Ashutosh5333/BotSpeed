@@ -154,12 +154,6 @@ function App() {
   };
   // console.log("specificCommentWords========>",specificCommentWords)
 
-
-  /**
-   * Handler for clicking on a hardcoded story preview in BuilderControls.
-   * This converts the story's content into a new post and displays it.
-   */
-
   const handleStoryPreviewClick = (story) => {
     setActiveStoryId(story.id);
     const newPostFromStory = {
@@ -294,11 +288,8 @@ function App() {
   return (
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       <CssBaseline />
-
-      {/* The persistent sidebar (left navigation) */}
-
-      <SidebarContent setActiveSection={setActiveSection} />
-
+     
+       <SidebarContent setActiveSection={setActiveSection} />
       {/* Main content area, containing BuilderControls and Phone Preview */}
       <Box
         component="main"
@@ -332,7 +323,8 @@ function App() {
           onAddSpecificWordAsComment={handleAddSpecificWordAsComment}
         />
 
-        {/* Phone Preview Area */}
+        {/* ===================>  Phone Preview Area  <==================== */}
+
         <Box
           sx={{
             flex: 1,
