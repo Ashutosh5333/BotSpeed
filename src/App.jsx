@@ -383,7 +383,8 @@ function App() {
           overflow: "hidden", // Prevents overflow of content within this box
         }}
       >
-        {/* Builder Controls Component */}
+        {/* ======>   Builder Controls Component  <========= */}
+
         <BuilderControls
           postContent={postContent}
           onPostContentChange={(e) => setPostContent(e.target.value)}
