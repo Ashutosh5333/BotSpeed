@@ -62,15 +62,15 @@ function CommentsView({
   //   commentsData // Initialize with dummy data
   // );
 
-  useEffect(() => {
-    // In a real app, you'd fetch comments for `post.id` here
-    if (post) {
-      // Simulate loading comments for the selected post
-      setCurrentPostComments(commentsData);
-    } else {
-      setCurrentPostComments([]);
-    }
-  }, [post]);
+  // useEffect(() => {
+  //   // In a real app, you'd fetch comments for `post.id` here
+  //   if (post) {
+  //     // Simulate loading comments for the selected post
+  //     setCurrentPostComments(commentsData);
+  //   } else {
+  //     setCurrentPostComments([]);
+  //   }
+  // }, [post]);
 
   const handleLocalAddComment = () => {
     if (commentText.trim() && post) {
@@ -136,7 +136,7 @@ function CommentsView({
             variant="body2"
             color="textSecondary"
             align="center"
-            sx={{ mt: 2 }}
+            sx={{ mt: 2 , color:"#ffffff"}}
           >
             No comments yet. Be the first to comment!
           </Typography>

@@ -58,7 +58,12 @@ function App() {
     id: "s1",
     user: "Zack",
     avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
-    content: "Just posted about my new project! Check it out!",
+    content: `Just posted about my new project! Check it out!  
+It's something I’ve been working on for weeks.  
+Would love your thoughts and feedback.  
+Tech meets creativity in this one.  
+Link is in my bio—go explore!  
+#devlife #newbeginnings`,
     image: "https://picsum.photos/id/237/800/600",
     likes: 3123, // Dummy data for likes
     comments: 245, // Dummy data for comments
@@ -199,6 +204,8 @@ function App() {
 
   // *** MODIFIED useEffect to synchronize phone preview with builder steps ***
   useEffect(() => {
+    setPosts([defaultPost]);
+
     switch (currentStep) {
       case 0:
         setActiveSection("posts");
