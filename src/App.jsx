@@ -37,8 +37,6 @@ import {
   StyledPhoneScreen,
 } from "./components/Style/Styled";
 import PhoneHeader from "./components/Builder/PhoneHeader";
-import StoryCard from "./components/Builder/StoryCard";
-import MessageBubble from "./components/Builder/MessageBubble";
 import { SidebarContent } from "./components/Builder/drawerList";
 import PostCard from "./components/Builder/PostCard";
 import CommentsView from "./components/Builder/CommentsView";
@@ -81,6 +79,7 @@ function App() {
 
   // State for comments (used in comments section and potentially on posts)
   const [commentText, setCommentText] = useState("");
+  const [currentPostComments, setCurrentPostComments] = useState([]);
 
   // State for Direct Messages
   const [dmMessage, setDmMessage] = useState("");
@@ -88,7 +87,6 @@ function App() {
 
   // State for creating new stories (distinct from hardcoded samples in BuilderControls)
   const [storyContent, setStoryContent] = useState("");
-
   const [activeStoryId, setActiveStoryId] = useState(null);
 
   // State for controlling the visibility of sections in BuilderControls
@@ -115,6 +113,8 @@ function App() {
   const handleAddComment = (commentTextToAdd) => {
     if (commentTextToAdd.trim()) {
       console.log(`Comment "${commentTextToAdd}" added.`);
+      // setCurrentPostComments((prevComments) => [...prevComments, newComment]);
+
       setCommentText(""); // Clear input field
     }
   };
@@ -132,6 +132,30 @@ function App() {
       setDmMessage(""); // Clear DM input
     }
   };
+
+  //  
+  const [specificCommentWords, setSpecificCommentWords] = useState("");
+
+  const handleAddSpecificWordAsComment = (word) => {
+    if (word.trim() && selectedPostForComments) {
+      const newGeneratedComment = {
+        id: Date.now() + "-generated", // Unique ID for generated comments
+        avatarBg: "#8D6E63", // A distinct color for generated comments
+        initial: "B", // 'B' for Bot or Builder
+        username: "BotComment",
+        text: word.trim(),
+      };
+
+      console.log(
+        `Generated comment "${word}" for post ID: ${selectedPostForComments.id}`
+      );
+
+      // handleAddComment(word); // Reuse existing comment adder
+      setCurrentPostComments((prevComments) => [...prevComments, newGeneratedComment]);
+    }
+  };
+  // console.log("specificCommentWords========>",specificCommentWords)
+
 
   /**
    * Handler for clicking on a hardcoded story preview in BuilderControls.
@@ -178,6 +202,7 @@ function App() {
     setActiveSection("posts");
   };
 
+
   // *** MODIFIED useEffect to synchronize phone preview with builder steps ***
   useEffect(() => {
     switch (currentStep) {
@@ -203,6 +228,8 @@ function App() {
         break;
     }
   }, [currentStep, posts, selectedPostForComments]);
+
+
 
   // Renders the content displayed inside the phone frame based on activeSection state
   const renderPhoneContent = () => {
@@ -244,6 +271,8 @@ function App() {
                   post={selectedPostForComments}
                   onAddComment={handleAddComment}
                   onClose={handleCloseCommentsOverlay} // Pass close handler
+                  setCurrentPostComments={setCurrentPostComments}
+                  currentPostComments={currentPostComments}
                 />
               )}
             </PhoneScreen>
@@ -300,6 +329,9 @@ function App() {
           currentStep={currentStep}
           onNextStep={handleNextStep}
           activeStoryId={activeStoryId}
+          specificCommentWords={specificCommentWords}
+          onSpecificCommentWordsChange={setSpecificCommentWords}
+          onAddSpecificWordAsComment={handleAddSpecificWordAsComment}
         />
 
         {/* Phone Preview Area */}
@@ -366,9 +398,9 @@ function App() {
               justifyContent: "space-around",
               width: "300px",
               borderRadius: "12px",
-              mt: 2,
-              p: 1,
-              backgroundColor: "#f0f0f0",
+              mt: 1,
+              p: 0.5,
+              backgroundColor: "#ffffff",
             }}
           >
             <Button
@@ -385,16 +417,16 @@ function App() {
                 borderRadius: "8px",
                 backgroundColor:
                   activeSection === "posts" && !showCommentsOverlay
-                    ? "#25D366"
+                    ? "#f5f5f5"
                     : "transparent",
                 color:
                   activeSection === "posts" && !showCommentsOverlay
-                    ? "#fff"
+                    ? "#000"
                     : "#000",
                 "&:hover": {
                   backgroundColor:
                     activeSection === "posts" && !showCommentsOverlay
-                      ? "#1DA851"
+                      ? "#e0e0e0"
                       : "#e0e0e0",
                 },
               }}
@@ -415,11 +447,11 @@ function App() {
                 flexGrow: 1,
                 borderRadius: "8px",
                 backgroundColor: showCommentsOverlay
-                  ? "#25D366"
+                  ? "#f5f5f5"
                   : "transparent", // Highlight if overlay is active
-                color: showCommentsOverlay ? "#fff" : "#000",
+                color: showCommentsOverlay ? "#000" : "#000",
                 "&:hover": {
-                  backgroundColor: showCommentsOverlay ? "#1DA851" : "#e0e0e0",
+                  backgroundColor: showCommentsOverlay ? "#e0e0e0" : "#e0e0e0",
                 },
               }}
             >
@@ -437,11 +469,11 @@ function App() {
                 flexGrow: 1,
                 borderRadius: "8px",
                 backgroundColor:
-                  activeSection === "dm" ? "#25D366" : "transparent",
-                color: activeSection === "dm" ? "#fff" : "#000",
+                  activeSection === "dm" ? "#f5f5f5" : "transparent",
+                color: activeSection === "dm" ? "#000" : "#000",
                 "&:hover": {
                   backgroundColor:
-                    activeSection === "dm" ? "#1DA851" : "#e0e0e0",
+                    activeSection === "dm" ? "#e0e0e0" : "#e0e0e0",
                 },
               }}
             >

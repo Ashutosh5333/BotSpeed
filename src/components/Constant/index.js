@@ -1,4 +1,3 @@
-
 // // Hardcoded sample stories for display as circular previews in BuilderControls
 // Hardcoded sample stories for display as circular previews in BuilderControls
 export const sampleStories = [
@@ -88,19 +87,91 @@ Hit like if you're a tech lover too!
   },
 ];
 
+// export const commentsData = [
+//   {
+//     avatarBg: "#FFC107",
+//     initial: "U",
+//     username: "Username",
+//     text: "Price", // This seems like a placeholder, consider what this text should actually be
+//   },
+//   {
+//     avatarBg: "#9C27B0",
+//     initial: "A",
+//     username: "AnotherUser",
+//     text: "Great post!",
+//   },
+//   // Add more comments as needed
+// ];
+
 export const commentsData = [
   {
+    id: "c1",
     avatarBg: "#FFC107",
     initial: "U",
-    username: "Username",
-    text: "Price", // This seems like a placeholder, consider what this text should actually be
+    username: "InstagramUser1",
+    text: "This is a great comment! Loving the new features.",
   },
   {
+    id: "c2",
     avatarBg: "#9C27B0",
     initial: "A",
     username: "AnotherUser",
-    text: "Great post!",
+    text: "I agree, very insightful. Keep up the good work!",
   },
-  // Add more comments as needed
+  {
+    id: "c3",
+    avatarBg: "#2196F3",
+    initial: "D",
+    username: "DevMaster",
+    text: "Looking forward to more updates! This is awesome.",
+  },
+  {
+    id: "c4",
+    avatarBg: "#E91E63",
+    initial: "G",
+    username: "GamerPro",
+    text: "Nice post! What's next?",
+  },
+  {
+    id: "c5",
+    avatarBg: "#4CAF50",
+    initial: "S",
+    username: "SocialGuru",
+    text: "Engaging content as always!",
+  },
+  {
+    id: "c6",
+    avatarBg: "#FF9800",
+    initial: "T",
+    username: "TechFan",
+    text: "So true! This is exactly what I needed.",
+  },
+  {
+    id: "c7",
+    avatarBg: "#673AB7",
+    initial: "C",
+    username: "CreativeMind",
+    text: "Inspiring! Thanks for sharing.",
+  },
+  {
+    id: "c8",
+    avatarBg: "#00BCD4",
+    initial: "L",
+    username: "LifeHacker",
+    text: "Great tips, very helpful!",
+  },
+  {
+    id: "c9",
+    avatarBg: "#F44336",
+    initial: "P",
+    username: "PixelArt",
+    text: "Love the visuals!",
+  },
+  {
+    id: "c10",
+    avatarBg: "#795548",
+    initial: "R",
+    username: "ReaderX",
+    text: "Well written, captivating!",
+  },
 ];
-

@@ -29,21 +29,57 @@ export default function BuilderControls({
   activeStoryId,
   currentStep, // New prop
   onNextStep,
+  specificCommentWords, //  TextField value
+  onSpecificCommentWordsChange, // Setter for the TextField value
+  onAddSpecificWordAsComment,
 }) {
+  const handleChipClick = (word) => {
+    // If the word is already in the text field, don't add it again or toggle
+    const currentWords = specificCommentWords
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+    if (!currentWords.includes(word)) {
+      const newWords =
+        currentWords.length > 0 ? `${specificCommentWords}, ${word}` : word;
+      onSpecificCommentWordsChange(newWords);
+      onAddSpecificWordAsComment(newWords);
+    }
+  };
+
+  // const handleNextAndAddComment = () => {
+  //   // Only add as comment if specific words input is active in current step
+  //   if (currentStep === 1 && specificCommentWords.trim()) {
+  //     const wordsArray = specificCommentWords
+  //       .split(",")
+  //       .map((word) => word.trim())
+  //       .filter(Boolean);
+  //     wordsArray.forEach((word) => {
+  //       onAddSpecificWordAsComment(word); // Call the new handler from App.js for each word
+  //     });
+  //   }
+  //   onNextStep(); // Always go to the next step
+  // };
+
   return (
     <>
       <Paper
         elevation={3}
         sx={{
           flex: 1,
-          p: 3,
+          p: 1,
           borderRadius: "12px",
           overflowY: "auto",
           maxHeight: { xs: "50vh", md: "calc(100vh - 100px)" },
         }}
       >
-        <Box mb={3} py={1} px={1}>
-          <Typography variant="subtitle1" fontSize={20} fontWeight="bold">
+        <Box mb={1} px={1}>
+          <Typography
+            variant="subtitle1"
+            fontSize={16}
+            fontWeight="bold"
+            py={1}
+          >
             When someone comments on:
           </Typography>
           {/* =======>  Post Stories  <======== */}
@@ -51,18 +87,42 @@ export default function BuilderControls({
             <RadioGroup
               aria-label="specific-post-heading"
               name="specific-post-option"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "start",
+                // mt:1,
+              }}
             >
               <FormControlLabel
                 value="specific"
-                control={<Radio checked />}
+                control={
+                  <Radio
+                    checked
+                    sx={{
+                      "&.Mui-checked": {
+                        color: "#000", // Checked outer circle
+                      },
+                      "& .MuiSvgIcon-root": {
+                        fontSize: 20,
+                      },
+                    }}
+                  />
+                }
                 label={
-                  <Typography variant="h6" alignContent={"center"} gutterBottom>
+                  <Typography
+                    variant="h6"
+                    alignContent={"center"}
+                    fontSize={12}
+                  >
                     A Specific Post or Reel
                   </Typography>
                 }
               />
             </RadioGroup>
-            {/*  Storiesss list */}
+
+            {/* =========>   Storiesss list   <======== */}
+
             <Box
               display="flex"
               overflow="auto"
@@ -76,7 +136,7 @@ export default function BuilderControls({
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
-                    mr: 2, // Spacing between stories
+                    mr: 0.1, // Spacing between stories
                     cursor: "pointer",
                     "&:hover": { opacity: 0.8 },
                   }}
@@ -97,46 +157,56 @@ export default function BuilderControls({
                           : "2px solid transparent", // Transparent border for inactive stories
                     }}
                   />
-                  <Typography
-                    variant="caption"
-                    mt={0.5}
-                    sx={{ textAlign: "center" }}
-                  >
-                    {story.user.length > 8
-                      ? story.user.substring(0, 7) + "..."
-                      : story.user}
-                  </Typography>
                 </Box>
               ))}
             </Box>
-            <Button variant="text" size="small">
+            <Button
+              variant="text"
+              size={"small"}
+              sx={{ fontWeight: "bold", fontSize: "0.9rem" }}
+            >
               Show All
             </Button>
           </Box>
         </Box>
-        {/* End of  Storiess */}
 
-        <Box mb={3}>
+        {/* ==========>   End  of  Stories  <=========== */}
+
+        <Box mb={3} px={1}>
           <RadioGroup aria-label="post-or-reel" name="post-or-reel-options">
             <Box
               display="flex"
               alignItems="center"
               justifyContent="space-between"
               bgcolor="#f5f5f5"
-              p={1}
+              px={1}
+              py={0.5}
               mb={1}
               borderRadius="8px"
             >
               <FormControlLabel
                 value="any"
-                control={<Radio bgcolor="#ffffff" />}
+                control={
+                  <Radio
+                    bgcolor="#ffffff"
+                    sx={{
+                      "&.Mui-checked": {
+                        color: "#000", // Checked outer circle
+                      },
+                      "& .MuiSvgIcon-root": {
+                        fontSize: 20,
+                      },
+                    }}
+                  />
+                }
                 label="Any post or reel"
               />
               <Box
                 component="span"
-                bgcolor="blue"
+                bgcolor="primary.light"
                 color="white"
-                p={1}
+                p={0.6}
+                px={2}
                 ml={2}
                 borderRadius="4px"
               >
@@ -149,18 +219,31 @@ export default function BuilderControls({
               justifyContent="space-between"
               bgcolor="#f5f5f5"
               p={1}
+              py={0.5}
               borderRadius="8px"
             >
               <FormControlLabel
                 value="next"
-                control={<Radio />}
+                control={
+                  <Radio
+                    sx={{
+                      "&.Mui-checked": {
+                        color: "#000", // Checked outer circle
+                      },
+                      "& .MuiSvgIcon-root": {
+                        fontSize: 20,
+                      },
+                    }}
+                  />
+                }
                 label="Next post or reel"
               />
               <Box
                 component="span"
-                bgcolor="blue"
+                bgcolor="primary.light"
                 color="white"
-                p={1}
+                p={0.6}
+                px={2}
                 ml={2}
                 borderRadius="4px"
               >
@@ -173,7 +256,7 @@ export default function BuilderControls({
         {/* Comment Automation Settings Section */}
 
         {currentStep >= 1 && (
-          <Box mb={3}>
+          <Box mb={3} px={1}>
             <Typography variant="subtitle1" mt={2} fontWeight="bold">
               And this comment has:
             </Typography>
@@ -181,7 +264,19 @@ export default function BuilderControls({
               <Box display="flex" alignItems="center" mb={1}>
                 <FormControlLabel
                   value="specific"
-                  control={<Radio checked />}
+                  control={
+                    <Radio
+                      checked
+                      sx={{
+                        "&.Mui-checked": {
+                          color: "#000", // Checked outer circle
+                        },
+                        "& .MuiSvgIcon-root": {
+                          fontSize: 20,
+                        },
+                      }}
+                    />
+                  }
                   label="A specific word or words"
                 />
               </Box>
@@ -191,12 +286,29 @@ export default function BuilderControls({
                 placeholder="Price"
                 size="small"
                 sx={{ mb: 1 }}
+                value={specificCommentWords} // Bind value
+                onChange={(e) => onSpecificCommentWordsChange(e.target.value)} // Update state on change
               />
               <Typography variant="caption" color="textSecondary" mb={2}>
                 Use commas to separate words. For example:{" "}
-                <Chip label="Price" size="small" sx={{ mr: 0.5 }} />
-                <Chip label="Link" size="small" sx={{ mr: 0.5 }} />
-                <Chip label="Shop" size="small" />
+                <Chip
+                  label="Price"
+                  size="small"
+                  sx={{ mr: 0.5, cursor: "pointer" }}
+                  onClick={() => handleChipClick("Price")} // Add onClick
+                />
+                <Chip
+                  label="Link"
+                  size="small"
+                  sx={{ mr: 0.5, cursor: "pointer" }}
+                  onClick={() => handleChipClick("Link")} // Add onClick
+                />
+                <Chip
+                  label="Shop"
+                  size="small"
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleChipClick("Shop")} // Add onClick
+                />
               </Typography>
             </Box>
 
@@ -372,9 +484,23 @@ export default function BuilderControls({
           </Box>
         )}
 
-        <Button variant="contained" onClick={onNextStep}>
-          Next
-        </Button>
+        <Box px={1}>
+          <Button
+            variant="transparent"
+            sx={{
+              backgroundColor: "#e0e0e0", // light gray
+              border: "2px solid #bdbdbd", // medium gray border
+              color: "#000", // black text
+              fontWeight: "bold",
+              "&:hover": {
+                backgroundColor: "#d5d5d5",
+              },
+            }}
+            onClick={onNextStep}
+          >
+            Next
+          </Button>
+        </Box>
       </Paper>
     </>
   );
