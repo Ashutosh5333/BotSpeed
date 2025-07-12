@@ -59,7 +59,7 @@ function App() {
     user: "Zack",
     avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
     content: "Just posted about my new project! Check it out!",
-    image: "https://picsum.photos/id/237/800/600", 
+    image: "https://picsum.photos/id/237/800/600",
     likes: 3123, // Dummy data for likes
     comments: 245, // Dummy data for comments
     time: "2h",
@@ -132,7 +132,7 @@ function App() {
     }
   };
 
-  //  
+  //
   const [specificCommentWords, setSpecificCommentWords] = useState("");
 
   const handleAddSpecificWordAsComment = (word) => {
@@ -148,7 +148,10 @@ function App() {
         `Generated comment "${word}" for post ID: ${selectedPostForComments.id}`
       );
       // Reuse existing comment adder
-      setCurrentPostComments((prevComments) => [...prevComments, newGeneratedComment]);
+      setCurrentPostComments((prevComments) => [
+        ...prevComments,
+        newGeneratedComment,
+      ]);
       handleAddComment(word);
     }
   };
@@ -194,7 +197,6 @@ function App() {
     setActiveSection("posts");
   };
 
-
   // *** MODIFIED useEffect to synchronize phone preview with builder steps ***
   useEffect(() => {
     switch (currentStep) {
@@ -221,8 +223,6 @@ function App() {
     }
   }, [currentStep, posts, selectedPostForComments]);
 
-
-
   // Renders the content displayed inside the phone frame based on activeSection state
   const renderPhoneContent = () => {
     switch (activeSection) {
@@ -231,7 +231,6 @@ function App() {
           <>
             <PhoneHeader title="Posts" onBack={() => {}} onMore={() => {}} />
             <PhoneScreen>
-              {" "}
               {/* This is the positioned parent for the overlay */}
               {posts.length === 0 ? (
                 <Typography
@@ -247,7 +246,7 @@ function App() {
                   <PostCard
                     key={post.id}
                     post={post}
-                    onViewComments={handleViewCommentsForPost} // Pass the handler to PostCard
+                    onViewComments={handleViewCommentsForPost}
                     commentText={commentText}
                     onCommentTextChange={(e) => setCommentText(e.target.value)}
                     onAddComment={handleAddComment}
@@ -288,8 +287,8 @@ function App() {
   return (
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
       <CssBaseline />
-     
-       <SidebarContent setActiveSection={setActiveSection} />
+
+      <SidebarContent setActiveSection={setActiveSection} />
       {/* Main content area, containing BuilderControls and Phone Preview */}
       <Box
         component="main"

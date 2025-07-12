@@ -41,7 +41,7 @@ export const StyledPhoneHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "5px 10px",
+  padding: "8px 10px",
   color: "#fff", // White text for header
   borderBottom: "1px solid #444", // Darker border
   marginTop: "0px",

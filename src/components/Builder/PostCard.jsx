@@ -29,13 +29,13 @@ export default function PostCard({
     // Apply dark background to the StyledPostCard or its content wrapper
     <StyledPostCard
       sx={{
-        backgroundColor: "#1a1a1a", // Dark background for the card
-        color: "#ffffff", // Default text color for the card
-        borderRadius: "12px", // Ensure rounded corners
-        width: "100%", // Ensure the card takes full width of its container
-        // height: "100vh", // REMOVED: This was causing layout issues
-        height: "auto", // Let content dictate height
-        boxSizing: "border-box", // Include padding and border in the element's total width and height
+        backgroundColor: "#1a1a1a", // Da
+        color: "#ffffff", // Defau
+        borderRadius: "12px",
+        width: "100%", 
+
+        height: "auto", // 
+        boxSizing: "border-box", 
       }}
     >
       <CardContent>

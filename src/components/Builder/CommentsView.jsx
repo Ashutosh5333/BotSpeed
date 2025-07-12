@@ -13,6 +13,7 @@ import SendIcon from "@mui/icons-material/Send";
 import PhoneHeader from "./PhoneHeader"; // This header will be for the comments modal
 import PostCard from "./PostCard"; // Keep PostCard for potential display within the modal if needed
 import { StyledPhoneCommentsFooter, StyledPhoneScreen } from "../Style/Styled";
+import CommentHeader from "./CommentHeader";
 
 // Dummy data for comments - replace with your actual data structure
 const commentsData = [
@@ -54,7 +55,8 @@ function CommentsView({
   post,
   onAddComment,
   onClose,
-  currentPostComments, setCurrentPostComments
+  currentPostComments,
+  setCurrentPostComments,
 }) {
   // const [currentPostComments, setCurrentPostComments] = useState(
   //   commentsData // Initialize with dummy data
@@ -85,7 +87,6 @@ function CommentsView({
   };
   //  console.log("commentText=====>",commentText)
 
-
   if (!post) {
     return null; // Don't render the modal if no post is selected
   }
@@ -99,6 +100,8 @@ function CommentsView({
         right: 0,
         height: "60%", // Display over 60% of the phone screen (40% of post visible)
         backgroundColor: "#1a1a1a", // Dark background for the modal
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
         borderRadius: "12px 12px 0 0", // Rounded top corners
         boxShadow: "0px -4px 20px rgba(0,0,0,0.5)",
         zIndex: 100, // Higher z-index to overlay
@@ -108,18 +111,16 @@ function CommentsView({
       }}
     >
       {/* Modal Header */}
-      <PhoneHeader
+      <CommentHeader
         title="Comments"
-        onBack={onClose} // Use onClose prop to close the modal
         onMore={() => {}}
         sx={{
-          borderBottom: "none", // Remove border from this header
-          backgroundColor: "#1a1a1a", // Ensure header background is dark
-          paddingTop: "10px", // Adjust padding for modal header
+          borderBottom: "none",
+          backgroundColor: "#1a1a1a",
+          paddingTop: "10px",
         }}
       />
-      <Divider sx={{ borderColor: "#444", mx: 2 }} />{" "}
-      {/* Divider below header */}
+
       {/* Scrollable Comments Section */}
       <Box
         sx={{
@@ -127,6 +128,7 @@ function CommentsView({
           overflowY: "auto", // Enable scrolling for comments
           padding: "10px 0", // Vertical padding
           backgroundColor: "#1a1a1a", // Ensure background is dark
+       
         }}
       >
         {currentPostComments.length === 0 ? (
@@ -221,4 +223,3 @@ function CommentsView({
 }
 
 export default CommentsView;
-

@@ -392,6 +392,7 @@ export default function BuilderControls({
                 rows={2}
                 variant="outlined"
                 placeholder="Write a message"
+                defaultValue="Hey"
                 sx={{ mb: 2 }}
               />
               <Button
