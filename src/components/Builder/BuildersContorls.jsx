@@ -22,7 +22,6 @@ export default function BuilderControls({
   onCreatePost,
   storyContent,
   onStoryContentChange,
-  onCreateStory,
   onStoryPreviewClick, // New prop for handling clicks on the hardcoded story previews
   commentText,
   onCommentTextChange,

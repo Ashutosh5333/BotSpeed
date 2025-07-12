@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -13,9 +13,19 @@ import {
   InputAdornment,
   Paper,
 } from "@mui/material";
+
 import {
   Send as SendIcon,
   EmojiEmotions as EmojiEmotionsIcon,
+  Home as HomeIcon, // New: Home icon
+  Search as SearchIcon, // New: Search icon
+  AddBoxOutlined as AddBoxOutlinedIcon, // New: Create/Add icon
+  Movie as MovieIcon, // New: Reels icon
+  AccountCircle as AccountCircleIcon, // New: Profile icon
+  FavoriteBorder as FavoriteBorderIcon, // Keep if still used elsewhere
+  ChatBubbleOutline as ChatBubbleOutlineIcon, // Keep if still used elsewhere
+  Share as ShareIcon, // Keep if still used elsewhere
+  BookmarkBorder as BookmarkBorderIcon, // Keep if still used elsewhere
 } from "@mui/icons-material";
 import BuilderControls from "./components/Builder/BuildersContorls";
 import {
@@ -28,6 +38,8 @@ import StoryCard from "./components/Builder/StoryCard";
 import MessageBubble from "./components/Builder/MessageBubble";
 import { SidebarContent } from "./components/Builder/drawerList";
 import PostCard from "./components/Builder/PostCard";
+import CommentsView from "./components/Builder/CommentsView";
+import DirectMessagesView from "./components/Builder/DirectMessagesView";
 
 // --- Components (Assuming these are defined as provided previously) ---
 
@@ -44,12 +56,20 @@ function PhoneFooter({ children }) {
 }
 
 function App() {
+  const defaultPost = {
+    id: "s1",
+    user: "Zack",
+    avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
+    content: "Just posted about my new project! Check it out!",
+    image: "https://picsum.photos/id/237/800/600",
+  };
+
   // State for managing active section in phone preview
   const [activeSection, setActiveSection] = useState("posts");
 
   // State for creating new posts
   const [postContent, setPostContent] = useState("");
-  const [posts, setPosts] = useState([]); // Array to hold all created posts
+  const [posts, setPosts] = useState([defaultPost]); // Array to hold all created posts
 
   // State for comments (used in comments section and potentially on posts)
   const [commentText, setCommentText] = useState("");
@@ -108,21 +128,6 @@ function App() {
     }
   };
 
-  // Handler for creating a new story from BuilderControls
-  const handleCreateStory = () => {
-    if (storyContent.trim()) {
-      const newStory = {
-        id: Date.now(),
-        user: "You",
-        content: storyContent,
-        image: "https://placehold.co/80x80/075E54/ffffff?text=Story",
-        avatar: "https://placehold.co/70x70/000/fff?text=You",
-      };
-      setStories([newStory, ...stories]); // Add new story to the top
-      setStoryContent(""); // Clear input field
-    }
-  };
-
   /**
    * NEW: Handler for clicking on a hardcoded story preview in BuilderControls.
    * This converts the story's content into a new post and displays it.
@@ -164,6 +169,23 @@ function App() {
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
+  // *** NEW: useEffect to synchronize phone preview with builder steps ***
+  useEffect(() => {
+    switch (currentStep) {
+      case 0:
+        setActiveSection("posts"); // Default to posts when at step 0
+        break;
+      case 1:
+        setActiveSection("comments"); // Move to comments when builder is on step 1
+        break;
+      case 2:
+        setActiveSection("dm"); // Move to DM when builder is on step 2
+        break;
+      default:
+        break;
+    }
+  }, [currentStep]);
+
   // Renders the content displayed inside the phone frame based on activeSection state
   const renderPhoneContent = () => {
     switch (activeSection) {
@@ -195,175 +217,26 @@ function App() {
             </PhoneScreen>
           </>
         );
-      case "stories": // This section shows dynamically created stories in the phone preview carousel
-        return (
-          <>
-            <PhoneHeader title="Stories" onBack={() => {}} onMore={() => {}} />
-            <PhoneScreen>
-              <Box
-                display="flex"
-                overflow="auto"
-                py={1}
-                sx={{ "&::-webkit-scrollbar": { display: "none" } }}
-              >
-                {/* Your own story (fixed placeholder) */}
-                <StoryCard
-                  story={{
-                    user: "You",
-                    avatar: "https://placehold.co/70x70/000/fff?text=You",
-                  }}
-                  onClick={() => handleStoryClick("your-story")}
-                />
-                {/* Dynamically created stories */}
-                {stories.length === 0 ? (
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    align="center"
-                    sx={{ mt: 2, ml: 2 }}
-                  >
-                    No stories yet. Create one!
-                  </Typography>
-                ) : (
-                  stories.map((story) => (
-                    <StoryCard
-                      key={story.id}
-                      story={story}
-                      onClick={() => handleStoryClick(story.id)}
-                    />
-                  ))
-                )}
-              </Box>
-            </PhoneScreen>
-          </>
-        );
       case "comments": // The comments view (currently with hardcoded example comments)
         return (
           <>
-            <PhoneHeader
-              title="Comments"
-              onBack={() => setActiveSection("posts")} // Navigate back to posts
-              onMore={() => {}}
+            <CommentsView
+              setActiveSection={setActiveSection}
+              setCommentText={setCommentText}
+              commentText={commentText}
             />
-            <PhoneScreen>
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                Comments on "WhatsApp Hits 3 Billion Users!"{" "}
-                {/* Example title */}
-              </Typography>
-              <Box display="flex" alignItems="center" mb={1}>
-                <Avatar sx={{ bgcolor: "#FFC107", mr: 1 }}>U</Avatar>
-                <Box>
-                  <Typography variant="subtitle2" fontWeight="bold">
-                    Username
-                  </Typography>
-                  <Typography variant="body2">Price</Typography>
-                  <Typography variant="caption" color="textSecondary">
-                    Reply
-                  </Typography>
-                </Box>
-              </Box>
-              <Box display="flex" alignItems="center" mb={1}>
-                <Avatar sx={{ bgcolor: "#9C27B0", mr: 1 }}>A</Avatar>
-                <Box>
-                  <Typography variant="subtitle2" fontWeight="bold">
-                    AnotherUser
-                  </Typography>
-                  <Typography variant="body2">Great post!</Typography>
-                  <Typography variant="caption" color="textSecondary">
-                    Reply
-                  </Typography>
-                </Box>
-              </Box>
-            </PhoneScreen>
-            <PhoneFooter>
-              <TextField
-                fullWidth
-                variant="outlined"
-                size="small"
-                placeholder="Add a comment for username..."
-                value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmojiEmotionsIcon />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => handleAddComment()} edge="end">
-                        <SendIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </PhoneFooter>
           </>
         );
       case "dm": // The Direct Messages view
         return (
           <>
-            <PhoneHeader
-              title="Chat with User"
-              onBack={() => setActiveSection("posts")}
-              onMore={() => {}}
+            <DirectMessagesView
+              setActiveSection={setActiveSection}
+              dmMessage={dmMessage}
+              setDmMessage={setDmMessage}
+              dmHistory={dmHistory}
+              handleSendDm={handleSendDm}
             />
-            <PhoneScreen
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "flex-end",
-              }}
-            >
-              <MessageBubble
-                type="received"
-                text="Hey there! I'm so happy you're here, thanks so much for your interest 😊"
-              />
-              <MessageBubble
-                type="received"
-                text="Click below and I'll send you the link in just a sec ✨"
-              />
-              <MessageBubble type="received">
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    backgroundColor: "#25D366",
-                    "&:hover": { backgroundColor: "#1DA851" },
-                  }}
-                >
-                  Send me the link
-                </Button>
-              </MessageBubble>
-              {dmHistory.map((msg, index) => (
-                <MessageBubble key={index} type={msg.type} text={msg.text} />
-              ))}
-            </PhoneScreen>
-            <PhoneFooter>
-              <TextField
-                fullWidth
-                variant="outlined"
-                size="small"
-                placeholder="Write a message"
-                value={dmMessage}
-                onChange={(e) => setDmMessage(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <EmojiEmotionsIcon />
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleSendDm} edge="end">
-                        <SendIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </PhoneFooter>
           </>
         );
       default:
@@ -399,7 +272,6 @@ function App() {
           onCreatePost={handleCreatePost}
           storyContent={storyContent}
           onStoryContentChange={(e) => setStoryContent(e.target.value)}
-          onCreateStory={handleCreateStory}
           onStoryPreviewClick={handleStoryPreviewClick} // Pass the handler for hardcoded story clicks
           commentText={commentText}
           onCommentTextChange={(e) => setCommentText(e.target.value)}
@@ -417,12 +289,55 @@ function App() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-            p: 2,
+            p: 1,
             maxHeight: { xs: "50vh", md: "calc(100vh - 100px)" }, // Constrain height on smaller screens
           }}
         >
-          <PhoneFrame>{renderPhoneContent()}</PhoneFrame>
-          {/* Phone Bottom Navigation (Post, Comments, DM buttons) */}
+          <PhoneFrame>
+            {/* {renderPhoneContent()} */}
+            <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+              {renderPhoneContent()}
+            </Box>
+            {activeSection !== "dm" && activeSection !== "comments" && (
+              <StyledPhoneFooter paddingTop={20}>
+                <IconButton
+                  onClick={() => setActiveSection("posts")}
+                  sx={{
+                    color: activeSection === "posts" ? "#25D366" : "#b0b0b0",
+                  }}
+                >
+                  <HomeIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setActiveSection("posts")}
+                  sx={{ color: "#b0b0b0" }}
+                >
+                  <SearchIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setActiveSection("posts")}
+                  sx={{ color: "#b0b0b0" }}
+                >
+                  <AddBoxOutlinedIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setActiveSection("posts")}
+                  sx={{ color: "#b0b0b0" }}
+                >
+                  <MovieIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setActiveSection("posts")}
+                  sx={{ color: "#b0b0b0" }}
+                >
+                  <AccountCircleIcon />
+                </IconButton>
+              </StyledPhoneFooter>
+            )}
+          </PhoneFrame>
+
+          {/* ==========> Phone Bottom Navigation (Post, Comments, DM buttons) <============ */}
+
           <Paper
             elevation={3}
             sx={{
@@ -487,6 +402,8 @@ function App() {
               DM
             </Button>
           </Paper>
+
+          {/* ==========> Phone Bottom Navigation (Post, Comments, DM buttons) <============ */}
         </Box>
       </Box>
     </Box>

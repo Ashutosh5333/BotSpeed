@@ -11,7 +11,7 @@ export default function PhoneHeader({ title, onBack, onMore }) {
   return (
     <StyledPhoneHeader>
       <IconButton size="small" onClick={onBack}>
-        <ArrowBackIcon />
+        <ArrowBackIcon color="#ffffff" />
       </IconButton>
       <Typography variant="subtitle1" fontWeight="bold">
         {title}
