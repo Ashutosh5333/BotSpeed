@@ -64,6 +64,9 @@ function App() {
 
   const [activeStoryId, setActiveStoryId] = useState(null);
 
+  // State for controlling the visibility of sections in BuilderControls
+  const [currentStep, setCurrentStep] = useState(0); // 0: initial, 1: comment, 2: DM, 3: other automations
+
   // Handler for creating a new post from BuilderControls
   const handleCreatePost = () => {
     if (postContent.trim()) {
@@ -154,6 +157,11 @@ function App() {
     console.log(
       `Story ${storyId} clicked in phone preview. Switching to posts view.`
     );
+  };
+
+  // Handler for clicking the "Next" button in BuilderControls
+  const handleNextStep = () => {
+    setCurrentStep((prevStep) => prevStep + 1);
   };
 
   // Renders the content displayed inside the phone frame based on activeSection state
@@ -396,6 +404,8 @@ function App() {
           commentText={commentText}
           onCommentTextChange={(e) => setCommentText(e.target.value)}
           onAddComment={handleAddComment}
+          currentStep={currentStep} // Pass current step
+          onNextStep={handleNextStep}
           activeStoryId={activeStoryId}
         />
 
