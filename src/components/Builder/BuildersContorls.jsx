@@ -42,12 +42,26 @@ export default function BuilderControls({
         }}
       >
         <Box mb={3} py={1} px={1}>
-          <Typography variant="subtitle1">When someone comments on:</Typography>
+          <Typography variant="subtitle1" fontSize={20} fontWeight="bold">
+            When someone comments on:
+          </Typography>
           {/* =======>  Post Stories  <======== */}
           <Box py={1} px={1} bgcolor="#f5f5f5" borderRadius="4px">
-            <Typography variant="h6" gutterBottom>
-              a speific post or reel
-            </Typography>
+            <RadioGroup
+              aria-label="specific-post-heading"
+              name="specific-post-option"
+            >
+              <FormControlLabel
+                value="specific"
+                control={<Radio checked />}
+                label={
+                  <Typography variant="h6" alignContent={"center"} gutterBottom>
+                    A Specific Post or Reel
+                  </Typography>
+                }
+              />
+            </RadioGroup>
+            {/*  Storiesss list */}
             <Box
               display="flex"
               overflow="auto"
@@ -155,102 +169,204 @@ export default function BuilderControls({
           </RadioGroup>
         </Box>
 
-        <Divider sx={{ my: 3 }} />
-
         {/* Comment Automation Settings Section */}
 
         <Box mb={3}>
-          <Typography variant="subtitle1" mt={2}>
+          <Typography variant="subtitle1" mt={2} fontWeight="bold">
             And this comment has:
           </Typography>
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch defaultChecked />
-            <Typography>A specific word or words</Typography>
-          </Box>
-          <TextField
-            fullWidth
-            variant="outlined"
-            placeholder="Price"
-            size="small"
-            sx={{ mb: 1 }}
-          />
-          <Typography variant="caption" color="textSecondary" mb={2}>
-            Use commas to separate words. For example:{" "}
-            <Chip label="Price" size="small" sx={{ mr: 0.5 }} />
-            <Chip label="Link" size="small" sx={{ mr: 0.5 }} />
-            <Chip label="Shop" size="small" />
-          </Typography>
-          <Box display="flex" alignItems="center" mb={2}>
-            <Switch />
-            <Typography>Any word</Typography>
+          <Box bgcolor="#f5f5f5" px={1} py={1} borderRadius={2}>
+            <Box display="flex" alignItems="center" mb={1}>
+              <FormControlLabel
+                value="specific"
+                control={<Radio checked />}
+                label="A specific word or words"
+              />
+            </Box>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder="Price"
+              size="small"
+              sx={{ mb: 1 }}
+            />
+            <Typography variant="caption" color="textSecondary" mb={2}>
+              Use commas to separate words. For example:{" "}
+              <Chip label="Price" size="small" sx={{ mr: 0.5 }} />
+              <Chip label="Link" size="small" sx={{ mr: 0.5 }} />
+              <Chip label="Shop" size="small" />
+            </Typography>
           </Box>
 
-          <Typography variant="subtitle1" mt={2}>
+          <Box
+            display="flex"
+            alignItems="center"
+            mb={2}
+            bgcolor="#f5f5f5"
+            borderRadius={2}
+            px={1}
+            py={1}
+            mt={1}
+          >
+            <FormControlLabel
+              value="any"
+              control={<Radio />}
+              label="Any word"
+            />
+          </Box>
+        </Box>
+
+        {/*  DIRECT MESSAGE Sections */}
+
+        <Box mb={2}>
+          <Typography variant="subtitle1" mt={2} fontWeight={"bold"}>
             They will get:
           </Typography>
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch defaultChecked />
-            <Typography>An opening DM</Typography>
+          <Box bgcolor="#f5f5f5" py={1} px={2} borderRadius={2}>
+            <Box display="flex" alignItems="center" mb={1}>
+              <Switch defaultChecked />
+              <Typography>An opening DM</Typography>
+            </Box>
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              variant="outlined"
+              defaultValue="Hey there! I'm so happy you're here, thanks so much for your interest 😊 Click below and I'll send you the link in just a sec ✨"
+              sx={{ mb: 1 }}
+            />
+            <Button variant="outlined" startIcon={<AddIcon />} sx={{ mb: 2 }}>
+              Add a Link
+            </Button>
           </Box>
-          <TextField
-            fullWidth
-            multiline
-            rows={4}
-            variant="outlined"
-            defaultValue="Hey there! I'm so happy you're here, thanks so much for your interest 😊 Click below and I'll send you the link in just a sec ✨"
-            sx={{ mb: 1 }}
-          />
-          <Button variant="outlined" startIcon={<AddIcon />} sx={{ mb: 2 }}>
-            Add a Link
-          </Button>
 
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch />
-            <Typography>A DM with the link</Typography>
+          <Box bgcolor="#f5f5f5" py={1} px={2} borderRadius={2} mt={1}>
+            <Box display="flex" alignItems="center" mb={2}>
+              <Typography>A DM with the link</Typography>
+            </Box>
+            <TextField
+              fullWidth
+              multiline
+              rows={2}
+              variant="outlined"
+              placeholder="Write a message"
+              sx={{ mb: 2 }}
+            />
+            <Button variant="outlined" startIcon={<AddIcon />}>
+              Add a Link
+            </Button>
           </Box>
-          <TextField
-            fullWidth
-            multiline
-            rows={2}
-            variant="outlined"
-            placeholder="Write a message"
-            sx={{ mb: 2 }}
-          />
-          <Button variant="outlined" startIcon={<AddIcon />}>
-            Add a Link
-          </Button>
         </Box>
-
-        <Divider sx={{ my: 3 }} />
 
         {/* Other Automation Settings Section */}
+
         <Box mb={3}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h6" gutterBottom fontWeight={"bold"}>
             Other things to automate
           </Typography>
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch defaultChecked />
-            <Typography>
-              Reply under the post so people feel seen and special
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch />
-            <Typography>Follow up to re-engage and build trust</Typography>
-          </Box>
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch />
-            <Typography>
-              Automatically ask for a follow to build your audience
-            </Typography>
-          </Box>
-          <Box display="flex" alignItems="center" mb={1}>
-            <Switch />
-            <Typography>
-              Ask for emails in DMs to keep in touch beyond social
-            </Typography>
+          <Box borderRadius={2}>
+            {" "}
+            {/* Added padding and border-radius to the main gray box */}
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              mb={1}
+              bgcolor="#f5f5f5"
+              p={1}
+              borderRadius={2}
+            >
+              <Typography>
+                Reply under the post so people feel seen and special
+              </Typography>
+              <Switch defaultChecked />
+            </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              mb={1}
+              bgcolor="#f5f5f5"
+              p={1}
+              borderRadius={2}
+            >
+              <Typography>Follow up to re-engage and build trust</Typography>
+              <Box display="flex" alignItems="center">
+                <Box
+                  component="span"
+                  bgcolor="blue"
+                  color="white"
+                  px={1}
+                  py={0.5}
+                  mr={1} /* Margin right to separate from switch */
+                  borderRadius="4px"
+                  fontSize="0.75rem" /* Smaller font size for Pro tag */
+                >
+                  Pro
+                </Box>
+                <Switch />
+              </Box>
+            </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              mb={1}
+              bgcolor="#f5f5f5"
+              p={1}
+              borderRadius={2}
+            >
+              <Typography>
+                Automatically ask for a follow to build your audience
+              </Typography>
+              <Box display="flex" alignItems="center">
+                <Box
+                  component="span"
+                  bgcolor="blue"
+                  color="white"
+                  px={1}
+                  py={0.5}
+                  mr={1}
+                  borderRadius="4px"
+                  fontSize="0.75rem"
+                >
+                  Pro
+                </Box>
+                <Switch />
+              </Box>
+            </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+              mb={1}
+              bgcolor="#f5f5f5"
+              p={1}
+              borderRadius={2}
+            >
+              <Typography>
+                Ask for emails in DMs to keep in touch beyond social
+              </Typography>
+              <Box display="flex" alignItems="center">
+                <Box
+                  component="span"
+                  bgcolor="blue"
+                  color="white"
+                  px={1}
+                  py={0.5}
+                  mr={1}
+                  borderRadius="4px"
+                  fontSize="0.75rem"
+                >
+                  Pro
+                </Box>
+                <Switch />
+              </Box>
+            </Box>
           </Box>
         </Box>
+
+        <Button border="2">Next</Button>
       </Paper>
     </>
   );
