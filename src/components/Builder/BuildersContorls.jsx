@@ -27,6 +27,9 @@ export default function BuilderControls({
   specificCommentWords, //  TextField value
   onSpecificCommentWordsChange,
   onAddSpecificWordAsComment,
+  chattingWithUserName = "Jane Doe", // Example: Name of the person you're chatting with
+  chattingWithUserAvatar = "https://via.placeholder.com/40?text=JD", // Example: Avatar of the person you're chatting with
+  currentUserAvatar = "https://via.placeholder.com/40?text=You"
 }) {
   const handleChipClick = (word) => {
     const currentWords = specificCommentWords

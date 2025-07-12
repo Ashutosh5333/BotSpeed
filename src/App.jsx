@@ -144,9 +144,9 @@ Link is in my bio—go explore!
     if (word.trim() && selectedPostForComments) {
       const newGeneratedComment = {
         id: Date.now() + "-generated", // Unique ID for generated comments
-        avatarBg: "#8D6E63", // A distinct color for generated comments
+        avatarBg:posts[0]?.avatar, // A distinct color for generated comments
         initial: "B", // 'B' for Bot or Builder
-        username: "BotComment",
+        username: posts[0]?.user,
         text: word.trim(),
       };
       console.log(
@@ -201,10 +201,13 @@ Link is in my bio—go explore!
     // activeSection remains what it was before the overlay, or set to 'posts'
     setActiveSection("posts");
   };
+  useEffect(() =>{
+    setPosts([defaultPost]);
+  },[])
 
   // *** MODIFIED useEffect to synchronize phone preview with builder steps ***
   useEffect(() => {
-    setPosts([defaultPost]);
+    // setPosts([defaultPost]);
 
     switch (currentStep) {
       case 0:
@@ -271,6 +274,9 @@ Link is in my bio—go explore!
                   onClose={handleCloseCommentsOverlay} // Pass close handler
                   setCurrentPostComments={setCurrentPostComments}
                   currentPostComments={currentPostComments}
+                  chattingWithUserName = {posts[0]?.user}
+                  chattingWithUserAvatar = {posts[0]?.avatar}
+                  currentUserAvatar = {posts[0]?.avatar}
                 />
               )}
             </PhoneScreen>
@@ -284,12 +290,17 @@ Link is in my bio—go explore!
             setDmMessage={setDmMessage}
             dmHistory={dmHistory}
             handleSendDm={handleSendDm}
+            chattingWithUserName = {posts[0]?.user}
+            chattingWithUserAvatar = {posts[0]?.avatar}
+            currentUserAvatar = {posts[0]?.avatar}
           />
         );
       default:
         return null;
     }
   };
+
+  // console.log("post=======>", posts);
 
   return (
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
@@ -327,6 +338,9 @@ Link is in my bio—go explore!
           specificCommentWords={specificCommentWords}
           onSpecificCommentWordsChange={setSpecificCommentWords}
           onAddSpecificWordAsComment={handleAddSpecificWordAsComment}
+          chattingWithUserName = {posts[0]?.user}
+          chattingWithUserAvatar = {posts[0]?.avatar}
+          currentUserAvatar = {posts[0]?.avatar}
         />
 
         {/* ===================>  Phone Preview Area  <==================== */}
