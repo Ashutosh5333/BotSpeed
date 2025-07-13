@@ -1,6 +1,5 @@
 import { IconButton, Typography } from "@mui/material";
 import { StyledPhoneHeader } from "../Style/Styled";
-
 import {
   EmojiEmotions as EmojiEmotionsIcon,
   MoreVert as MoreVertIcon,
@@ -17,7 +16,11 @@ export default function CommentHeader({ title, onBack, onMore }) {
       <Typography variant="subtitle1" fontWeight="bold">
         {title}
       </Typography>
-      <IconButton size="small" onClick={onMore}  sx={{ color: '#ffffff' }}>
+      <IconButton
+        size="small"
+        onClick={onMore}
+        sx={{ color: "#ffffff", mr: 2 }}
+      >
         {/* <MoreVertIcon /> */}
         <FiSend />
       </IconButton>

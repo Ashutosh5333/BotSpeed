@@ -8,23 +8,10 @@ import {
   IconButton,
   Divider,
 } from "@mui/material";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import SendIcon from "@mui/icons-material/Send";
-import PhoneHeader from "./PhoneHeader"; // This header will be for the comments modal
-import PostCard from "./PostCard"; // Keep PostCard for potential display within the modal if needed
 import { StyledPhoneCommentsFooter, StyledPhoneScreen } from "../Style/Styled";
 import CommentHeader from "./CommentHeader";
-
-// Dummy data for comments - replace with your actual data structure
-const commentsData = [
-  {
-    id: "c1",
-    avatarBg: "#FFC107",
-    initial: "U",
-    username: "InstagramUser1",
-    text: "This is a great comment! Loving the new features.",
-  },
-];
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 
 // Reusable component for the comments input footer
 function CommentsInputFooter({ children }) {
@@ -57,9 +44,9 @@ function CommentsView({
   onClose,
   currentPostComments,
   setCurrentPostComments,
-  chattingWithUserName = "Jane Doe", // Example: Name of the person you're chatting with
-  chattingWithUserAvatar = "https://via.placeholder.com/40?text=JD", // Example: Avatar of the person you're chatting with
-  currentUserAvatar = "https://via.placeholder.com/40?text=You", 
+  chattingWithUserName,
+  chattingWithUserAvatar,
+  currentUserAvatar,
 }) {
   // const [currentPostComments, setCurrentPostComments] = useState(
   //   commentsData // Initialize with dummy data
@@ -127,11 +114,10 @@ function CommentsView({
       {/* Scrollable Comments Section */}
       <Box
         sx={{
-          flexGrow: 1, // Take all available space
-          overflowY: "auto", // Enable scrolling for comments
-          padding: "10px 0", // Vertical padding
-          backgroundColor: "#1a1a1a", // Ensure background is dark
-       
+          flexGrow: 1,
+          overflowY: "auto",
+          // padding: "10px 0",
+          backgroundColor: "#1a1a1a",
         }}
       >
         {currentPostComments.length === 0 ? (
@@ -139,7 +125,7 @@ function CommentsView({
             variant="body2"
             color="textSecondary"
             align="center"
-            sx={{ mt: 2 , color:"#ffffff"}}
+            sx={{ mt: 2, color: "#ffffff" }}
           >
             No comments yet. Be the first to comment!
           </Typography>
@@ -179,11 +165,31 @@ function CommentsView({
       </Box>
       {/* Comments Input Footer */}
       <CommentsInputFooter>
+        <Box
+          sx={{
+            // backgroundColor: '#1a1a1a',
+            backgroundColor: "#ffffff",
+            p: 0.5, // Padding around the icon
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "10px", // Just for demonstration
+            borderRadius: "20px",
+          }}
+          mr={1}
+        >
+          <LocalHospitalIcon
+            sx={{
+              fontSize: 20, // Larger size for better visibility
+              color: "#1a1a1a", // Set the icon color to white
+            }}
+          />
+        </Box>
         <TextField
           fullWidth
-          variant="outlined"
+          // variant="outlined"
           size="small"
-          placeholder="Add a comment..."
+          placeholder="Add a comment for username"
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           sx={{
@@ -198,27 +204,28 @@ function CommentsView({
             "& .MuiInputBase-input::placeholder": {
               color: "#a0a0a0",
               opacity: 1,
+              fontSize: "0.75rem",
             },
           }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <EmojiEmotionsIcon sx={{ color: "#b0b0b0" }} />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={handleLocalAddComment}
-                  edge="end"
-                  disabled={!commentText.trim()}
-                  sx={{ color: "#25D366" }}
-                >
-                  <SendIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+          // InputProps={{
+          //   startAdornment: (
+          //     <InputAdornment position="start">
+          //       {/* <EmojiEmotionsIcon sx={{ color: "#b0b0b0" }} /> */}
+          //     </InputAdornment>
+          //   ),
+          //   endAdornment: (
+          //     <InputAdornment position="end">
+          //       <IconButton
+          //         onClick={handleLocalAddComment}
+          //         edge="end"
+          //         disabled={!commentText.trim()}
+          //         sx={{ color: "#25D366" }}
+          //       >
+          //         <SendIcon />
+          //       </IconButton>
+          //     </InputAdornment>
+          //   ),
+          // }}
         />
       </CommentsInputFooter>
     </Box>

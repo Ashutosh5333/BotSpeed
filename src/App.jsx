@@ -233,13 +233,13 @@ Link is in my bio—go explore!
     }
   }, [currentStep, posts, selectedPostForComments]);
 
-  // Renders the content displayed inside the phone frame based on activeSection state
   const renderPhoneContent = () => {
     switch (activeSection) {
       case "posts":
         return (
           <>
             <PhoneHeader title="Posts" onBack={() => {}} onMore={() => {}} />
+              
             <PhoneScreen>
               {/* This is the positioned parent for the overlay */}
               {posts.length === 0 ? (

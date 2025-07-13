@@ -28,9 +28,9 @@ function DirectMessagesView({
   dmHistory,
   handleSendDm,
   // Add these props to receive user information
-  chattingWithUserName = "Jane Doe", // Example: Name of the person you're chatting with
-  chattingWithUserAvatar = "https://via.placeholder.com/40?text=JD", // Example: Avatar of the person you're chatting with
-  currentUserAvatar = "https://via.placeholder.com/40?text=You", // Example: Avatar of the current user
+  chattingWithUserName, // Example: Name of the person you're chatting with
+  chattingWithUserAvatar, // Example: Avatar of the person you're chatting with
+  currentUserAvatar, // Example: Avatar of the current user
 }) {
   return (
     <>

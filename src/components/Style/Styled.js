@@ -51,18 +51,18 @@ export const StyledPhoneHeader = styled(Box)(({ theme }) => ({
 
 //  comments
 export const StyledPhoneCommentsFooter = styled(Box)(({ theme }) => ({
-  position: "absolute", // This can remain absolute if it's always at the bottom of the modal
+  position: "absolute", 
   bottom: 0,
   left: 0,
   right: 0,
-  height: "50px", // This will be overridden by inline styles in CommentsInputFooter
+  height: "50px", 
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
-  padding: "0 10px",
+  // padding: "0 10px",
   borderTop: "1px solid #444", // Darker border
   boxShadow: "0px -2px 10px rgba(0,0,0,0.3)",
-  zIndex: 10, // This z-index is for the footer within the modal
+  zIndex: 10, 
 }));
 
 //  Styled for dm
@@ -115,7 +115,7 @@ export const StyledMessageBubble = styled(Box)(({ theme, type }) => ({
   borderRadius: "15px",
   marginBottom: "8px",
   alignSelf: type === "sent" ? "flex-end" : "flex-start",
-  backgroundColor: type === "sent" ? "#7346e3" : "#333333", // Darker theme colors for bubbles
+  backgroundColor: type === "sent" ? "#7346e3" : "#333333", 
   color: "#ffffff", // White text for message bubbles
 }));
 

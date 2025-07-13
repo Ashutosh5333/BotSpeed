@@ -11,6 +11,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CallIcon from "@mui/icons-material/Call"; // Import CallIcon
 import VideoCallIcon from "@mui/icons-material/VideoCall"; // Import VideoCallIcon
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 
 // Assuming PhoneHeader receives userName, userAvatar, onCall, onVideoCall, onBack, onMore
 function PhoneHeader({
@@ -27,24 +28,46 @@ function PhoneHeader({
       {" "}
       {/* Maintain existing background color */}
       <Toolbar>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="back"
-          onClick={onBack}
-        >
-          <ArrowBackIcon />
-        </IconButton>
+        {!userAvatar && (
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="back"
+            onClick={onBack}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+        )}
         <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1, ml: 1 }}>
           {userAvatar && (
-            <Avatar
-              src={userAvatar}
-              alt={userName}
-              sx={{ width: 24, height: 24, mr: 1 }}
+            // <Avatar
+            //   src={userAvatar}
+            //   alt={userName}
+            //   sx={{ width: 24, height: 24, mr: 1 }}
+            // />
+            <Box
+            sx={{
+              // backgroundColor: '#1a1a1a', 
+              backgroundColor: '#ffffff', 
+              p: .4, // Padding around the icon
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '10px', // Just for demonstration
+              borderRadius: '20px',
+            }}
+          >
+            <LocalHospitalIcon
+              sx={{
+                fontSize: 20, // Larger size for better visibility
+                color: '#1a1a1a', // Set the icon color to white
+              }}
             />
+          </Box>
           )}
-          <Typography variant="h6" component="div" p={1}>
-            {userName || title} {/* Display the user's name */}
+          <Typography variant="h6" component="div"  fontSize={12} p={1}>
+            {/* {userName || title}  */}
+           { title || "Botspacehq"}
           </Typography>
         </Box>
 
@@ -65,29 +88,3 @@ function PhoneHeader({
 }
 
 export default PhoneHeader;
-
-// Prev Code
-// import { IconButton, Typography } from "@mui/material";
-// import { StyledPhoneHeader } from "../Style/Styled";
-
-// import {
-//   EmojiEmotions as EmojiEmotionsIcon,
-//   MoreVert as MoreVertIcon,
-//   ArrowBack as ArrowBackIcon,
-// } from "@mui/icons-material";
-
-// export default function PhoneHeader({ title, onBack, onMore }) {
-//   return (
-//     <StyledPhoneHeader>
-//       <IconButton size="small" onClick={onBack}>
-//         <ArrowBackIcon color="#ffffff" sx={{ color: '#ffffff' }}/>
-//       </IconButton>
-//       <Typography variant="subtitle1" fontWeight="bold">
-//         {title}
-//       </Typography>
-//       <IconButton size="small" onClick={onMore}>
-//         <MoreVertIcon />
-//       </IconButton>
-//     </StyledPhoneHeader>
-//   );
-// }
