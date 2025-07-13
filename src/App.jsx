@@ -53,7 +53,6 @@ function PhoneScreen({ children }) {
 function App() {
   const defaultPost = {
     id: "s1",
-    id: "s1",
     user: "Zack",
     avatar: "https://via.placeholder.com/60/FF5733/FFFFFF?text=YOU",
     content: `Just posted about my new project! Check it out!  
