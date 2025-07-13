@@ -2,8 +2,12 @@ import { styled } from "@mui/system";
 import { Box, Card, Avatar, Typography } from "@mui/material";
 
 export const StyledPhoneFrame = styled(Box)(({ theme }) => ({
-  width: "300px",
-  height: "600px",
+  width: "calc(100% - 40px)", // Take almost full width with some padding on small screens
+  maxWidth: "300px", // But don't exceed 300px width
+  height: "calc(100vh - 120px)", // Take most of the viewport height on small screens
+  maxHeight: "600px",
+  // width: "300px",
+  // height: "600px",
   backgroundColor: "#000", // This sets the main frame background to black
   borderRadius: "36px",
   boxShadow: "0px 0px 20px rgba(0,0,0,0.5)",
@@ -22,6 +26,13 @@ export const StyledPhoneFrame = styled(Box)(({ theme }) => ({
     backgroundColor: "#222", // Dark notch
     borderRadius: "0 0 10px 10px",
     zIndex: 1,
+  },
+
+  [theme.breakpoints.up("sm")]: {
+    // For screens larger than 'sm' (small, 600px by default)
+    // You can adjust these values if needed for tablets
+    width: "300px", // Fixed width for tablet/desktop
+    height: "600px", // Fixed height for tablet/desktop
   },
 }));
 

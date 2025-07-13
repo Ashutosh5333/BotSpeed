@@ -354,7 +354,7 @@ Link is in my bio—go explore!
         >
           <Box
             sx={{
-              flex: 1,
+              // flex: 1,
               display: "flex",
               // flexDirection: "column",
               justifyContent: "space-between",
