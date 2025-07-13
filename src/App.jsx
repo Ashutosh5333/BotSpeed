@@ -257,7 +257,7 @@ Link is in my bio—go explore!
                   />
                 ))
               )}
-              
+
               {/* Render CommentsView as an overlay *inside* PhoneScreen */}
 
               {showCommentsOverlay && selectedPostForComments && (
@@ -300,7 +300,7 @@ Link is in my bio—go explore!
 
   return (
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-         {/* <CssBaseline/>     */}
+      {/* <CssBaseline/>     */}
 
       <SidebarContent setActiveSection={setActiveSection} />
       {/* Main content area, containing BuilderControls and Phone Preview */}
@@ -353,13 +353,46 @@ Link is in my bio—go explore!
             maxHeight: { xs: "50vh", md: "calc(100vh - 100px)" },
           }}
         >
+          <Box
+            sx={{
+              flex: 1,
+              display: "flex",
+              // flexDirection: "column",
+              justifyContent: "space-between",
+              alignItems: "center",
+              p: 1,
+            }}
+          >
+            <Button
+              variant="contained"
+              sx={{
+                position: "absolute",
+                top: 8, // Adjust as needed for spacing
+                right: 8, // Adjust as needed for spacing
+                backgroundColor: "#106cf3", // Example color from the image
+                color: "white",
+                textTransform: "none",
+                padding: "4px 12px",
+                borderRadius: "10px",
+                minWidth: "unset", // Allow content to dictate width
+                height: "32px", // Adjust height as needed
+                fontSize: "0.8rem",
+                fontWeight: 600,
+                zIndex: 10, // Ensure it's above other elements
+                "&:hover": {
+                  backgroundColor: "#0a5bc9",
+                },
+              }}
+              onClick={() => console.log("Go Live Clicked!")}
+            >
+              Go Live
+            </Button>
+          </Box>
+
           <PhoneFrame>
             <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
               {renderPhoneContent()}
             </Box>
-
-            {/* The existing phone footer: Only show if not in DM or Comments overlay is active */}
-          
             {activeSection !== "dm" && !showCommentsOverlay && (
               <StyledPhoneFooter>
                 <IconButton
@@ -397,8 +430,6 @@ Link is in my bio—go explore!
               </StyledPhoneFooter>
             )}
           </PhoneFrame>
-
-          {/* ==========> Phone Bottom Navigation (Post, Comments, DM buttons) <============ */}
 
           <Paper
             elevation={3}
