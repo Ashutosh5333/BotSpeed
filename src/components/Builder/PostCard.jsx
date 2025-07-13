@@ -17,6 +17,7 @@ import {
   BookmarkBorder as BookmarkBorderIcon,
   MoreVert as MoreVertIcon, // Import the MoreVert icon
 } from "@mui/icons-material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 
 export default function PostCard({
@@ -27,8 +28,7 @@ export default function PostCard({
   onViewComments,
 }) {
   return (
-    // Apply dark background to the StyledPostCard or its content wrapper
-    <StyledPostCard
+   <StyledPostCard
       sx={{
         backgroundColor: "#1a1a1a", // Da
         color: "#ffffff", // Defau
@@ -74,7 +74,7 @@ export default function PostCard({
 
           <Box display="flex" alignItems="center" ml="auto" gap={0.5}>
             <IconButton size="small" sx={{ color: "#b0b0b0" }}>
-              <MoreVertIcon fontSize="small" />
+              <MoreHorizIcon fontSize="small" />
             </IconButton>
           </Box>
         </Box>
@@ -126,6 +126,12 @@ export default function PostCard({
         <Typography variant="body2" mb={1} color="#ffffff">
           {post.caption || post.content}
         </Typography>
+
+        <Typography variant="body2" mb={1} color="#ffffff">
+            View  comments
+        </Typography>
+
+
       </CardContent>
     </StyledPostCard>
   );

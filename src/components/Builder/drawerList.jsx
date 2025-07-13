@@ -16,7 +16,7 @@ export const SidebarContent = ({ setActiveSection }) => {
         height: '100vh',
         overflow: 'auto',
         bgcolor: 'background.paper',
-        border: '1px solid rgba(0, 0, 0, 0.12)', // Only box border
+        // border: '1px solid rgba(0, 0, 0, 0.12)', // Only box border
         borderRadius: '8px', // Optional
         display: 'flex',
         flexDirection: 'column',

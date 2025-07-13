@@ -27,10 +27,8 @@ import {
   Share as ShareIcon,
   BookmarkBorder as BookmarkBorderIcon,
 } from "@mui/icons-material";
-
 // Import components
 import BuilderControls from "./components/Builder/BuildersContorls";
-
 import {
   StyledPhoneFooter,
   StyledPhoneFrame,
@@ -80,8 +78,7 @@ Link is in my bio—go explore!
 
   // State for creating new posts
   const [postContent, setPostContent] = useState("");
-  const [posts, setPosts] = useState([defaultPost]); // Array to hold all created posts
-
+  const [posts, setPosts] = useState([defaultPost]);
   // State for comments (used in comments section and potentially on posts)
   const [commentText, setCommentText] = useState("");
   const [currentPostComments, setCurrentPostComments] = useState([]);
@@ -94,7 +91,6 @@ Link is in my bio—go explore!
   const [storyContent, setStoryContent] = useState("");
   const [activeStoryId, setActiveStoryId] = useState(null);
 
-  // State for controlling the visibility of sections in BuilderControls
   const [currentStep, setCurrentStep] = useState(0); // 0: initial, 1: comment, 2: DM, 3: other automations
 
   // Handler for creating a new post from BuilderControls
@@ -144,7 +140,7 @@ Link is in my bio—go explore!
     if (word.trim() && selectedPostForComments) {
       const newGeneratedComment = {
         id: Date.now() + "-generated", // Unique ID for generated comments
-        avatarBg:posts[0]?.avatar, // A distinct color for generated comments
+        avatarBg: posts[0]?.avatar, // A distinct color for generated comments
         initial: "B", // 'B' for Bot or Builder
         username: posts[0]?.user,
         text: word.trim(),
@@ -190,20 +186,19 @@ Link is in my bio—go explore!
   // MODIFIED HANDLER: When a user wants to view comments for a specific post
   const handleViewCommentsForPost = (post) => {
     setSelectedPostForComments(post);
-    setShowCommentsOverlay(true); // Show the comments overlay
-    // activeSection remains 'posts' behind the overlay, or 'comments' for builder sync
+    setShowCommentsOverlay(true);
   };
 
   // NEW HANDLER: To close the comments overlay
   const handleCloseCommentsOverlay = () => {
     setShowCommentsOverlay(false);
     setSelectedPostForComments(null);
-    // activeSection remains what it was before the overlay, or set to 'posts'
+
     setActiveSection("posts");
   };
-  useEffect(() =>{
+  useEffect(() => {
     setPosts([defaultPost]);
-  },[])
+  }, []);
 
   // *** MODIFIED useEffect to synchronize phone preview with builder steps ***
   useEffect(() => {
@@ -216,15 +211,14 @@ Link is in my bio—go explore!
         setShowCommentsOverlay(false); // Ensure overlay is hidden
         break;
       case 1:
-        // When builder goes to comments step, if no post is selected, default to the first.
         if (posts.length > 0 && !selectedPostForComments) {
           setSelectedPostForComments(posts[0]);
         }
         setShowCommentsOverlay(true); // Show overlay when builder is on step 1
-        setActiveSection("posts"); // Keep activeSection as 'posts' behind the overlay
+        setActiveSection("posts");
         break;
       case 2:
-        setActiveSection("dm"); // Switch to DM as a full screen view
+        setActiveSection("dm");
         setSelectedPostForComments(null);
         setShowCommentsOverlay(false); // Ensure overlay is hidden
         break;
@@ -239,7 +233,7 @@ Link is in my bio—go explore!
         return (
           <>
             <PhoneHeader title="Posts" onBack={() => {}} onMore={() => {}} />
-              
+
             <PhoneScreen>
               {/* This is the positioned parent for the overlay */}
               {posts.length === 0 ? (
@@ -263,7 +257,9 @@ Link is in my bio—go explore!
                   />
                 ))
               )}
+              
               {/* Render CommentsView as an overlay *inside* PhoneScreen */}
+
               {showCommentsOverlay && selectedPostForComments && (
                 <CommentsView
                   setActiveSection={setActiveSection} // Still needed for back button in CommentsView header
@@ -274,9 +270,9 @@ Link is in my bio—go explore!
                   onClose={handleCloseCommentsOverlay} // Pass close handler
                   setCurrentPostComments={setCurrentPostComments}
                   currentPostComments={currentPostComments}
-                  chattingWithUserName = {posts[0]?.user}
-                  chattingWithUserAvatar = {posts[0]?.avatar}
-                  currentUserAvatar = {posts[0]?.avatar}
+                  chattingWithUserName={posts[0]?.user}
+                  chattingWithUserAvatar={posts[0]?.avatar}
+                  currentUserAvatar={posts[0]?.avatar}
                 />
               )}
             </PhoneScreen>
@@ -290,9 +286,9 @@ Link is in my bio—go explore!
             setDmMessage={setDmMessage}
             dmHistory={dmHistory}
             handleSendDm={handleSendDm}
-            chattingWithUserName = {posts[0]?.user}
-            chattingWithUserAvatar = {posts[0]?.avatar}
-            currentUserAvatar = {posts[0]?.avatar}
+            chattingWithUserName={posts[0]?.user}
+            chattingWithUserAvatar={posts[0]?.avatar}
+            currentUserAvatar={posts[0]?.avatar}
           />
         );
       default:
@@ -304,15 +300,16 @@ Link is in my bio—go explore!
 
   return (
     <Box sx={{ display: "flex", height: "100vh", overflow: "hidden" }}>
-      <CssBaseline />
+         {/* <CssBaseline/>     */}
 
       <SidebarContent setActiveSection={setActiveSection} />
       {/* Main content area, containing BuilderControls and Phone Preview */}
+
       <Box
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
+          p: 1,
           mt: 0,
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
@@ -338,9 +335,9 @@ Link is in my bio—go explore!
           specificCommentWords={specificCommentWords}
           onSpecificCommentWordsChange={setSpecificCommentWords}
           onAddSpecificWordAsComment={handleAddSpecificWordAsComment}
-          chattingWithUserName = {posts[0]?.user}
-          chattingWithUserAvatar = {posts[0]?.avatar}
-          currentUserAvatar = {posts[0]?.avatar}
+          chattingWithUserName={posts[0]?.user}
+          chattingWithUserAvatar={posts[0]?.avatar}
+          currentUserAvatar={posts[0]?.avatar}
         />
 
         {/* ===================>  Phone Preview Area  <==================== */}
@@ -360,7 +357,9 @@ Link is in my bio—go explore!
             <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
               {renderPhoneContent()}
             </Box>
+
             {/* The existing phone footer: Only show if not in DM or Comments overlay is active */}
+          
             {activeSection !== "dm" && !showCommentsOverlay && (
               <StyledPhoneFooter>
                 <IconButton
@@ -406,7 +405,7 @@ Link is in my bio—go explore!
             sx={{
               display: "flex",
               justifyContent: "space-around",
-              width: "300px",
+              width: "250px",
               borderRadius: "12px",
               mt: 1,
               p: 0.5,

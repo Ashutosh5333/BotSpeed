@@ -116,7 +116,7 @@ function CommentsView({
         sx={{
           flexGrow: 1,
           overflowY: "auto",
-          // padding: "10px 0",
+          padding: "10px 0",
           backgroundColor: "#1a1a1a",
         }}
       >
@@ -137,11 +137,13 @@ function CommentsView({
               alignItems="flex-start"
               mb={2}
               px={2}
+              // p={1}
+              gap={1}
             >
-              <Avatar sx={{ bgcolor: comment.avatarBg, mr: 1.5 }}>
-                {comment.initial}
+              <Avatar sx={{ bgcolor: comment.avatarBg, mr: 2 }}>
+                {/* {comment.initial} */}
               </Avatar>
-              <Box>
+              <Box >
                 <Typography
                   variant="subtitle2"
                   fontWeight="bold"
